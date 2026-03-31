@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bistola Guesthouse | Πολυτελής Διαμονή στη Βλαχοκερασιά</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #B5915F;
+            --accent-hover: #9b794a;
+            --bg-light: #F9F9F9;
+            --text-dark: #333333;
+            --text-light: #777777;
+            --white: #ffffff;
+            --google-stars: #fbbc04; /* Το κίτρινο χρώμα των αστεριών της Google */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--white); color: var(--text-dark); line-height: 1.8; overflow-x: hidden; }
+        h1, h2, h3, h4, .logo { font-family: 'Playfair Display', serif; font-weight: 400; }
+        a { text-decoration: none; color: inherit; }
+
+        .section-padding { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
+        .bg-light { background-color: var(--bg-light); }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+        .section-subtitle { text-align: center; font-size: 1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 50px; }
+
+        /* --- NAVIGATION --- */
+        header { position: fixed; top: 0; left: 0; width: 100%; padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: all 0.4s ease; }
+        header.scrolled { background-color: var(--white); padding: 15px 5%; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        header.scrolled .logo, header.scrolled nav ul li a, header.scrolled .menu-toggle { color: var(--primary); }
+        header.scrolled .book-btn { border-color: var(--primary); color: var(--primary); }
+        header.scrolled .book-btn:hover { background-color: var(--primary); color: var(--white); }
+
+        .logo { font-size: 1.8rem; color: var(--white); letter-spacing: 2px; text-transform: uppercase; }
+        nav ul { list-style: none; display: flex; gap: 30px; align-items: center; }
+        nav ul li a { color: var(--white); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; transition: color 0.3s; }
+        nav ul li a:hover { color: var(--accent) !important; }
+        .book-btn { border: 1px solid var(--white); padding: 10px 25px; transition: all 0.3s ease; }
+        .book-btn:hover { background-color: var(--white); color: var(--primary); }
+        .menu-toggle { display: none; color: var(--white); font-size: 1.5rem; cursor: pointer; z-index: 1001; }
+
+        /* --- HERO --- */
+        #home { height: 100vh; background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('images/hero.jpg') center/cover no-repeat; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--white); }
+        .hero-content h1 { font-size: 4.5rem; margin-bottom: 20px; letter-spacing: 4px; }
+        .hero-content p { font-size: 1.2rem; font-weight: 300; letter-spacing: 3px; margin-bottom: 40px; text-transform: uppercase; }
+        .btn-solid { background-color: var(--accent); color: var(--white); padding: 16px 45px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; transition: background 0.3s ease; display: inline-block; border: none; cursor: pointer; }
+        .btn-solid:hover { background-color: var(--accent-hover); }
+
+        /* --- PHILOSOPHY --- */
+        #philosophy { display: flex; align-items: center; gap: 80px; }
+        .phil-text { flex: 1; }
+        .phil-text h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 30px; }
+        .phil-image { flex: 1; height: 500px; background: url('images/philosophy.jpg') center/cover; box-shadow: 20px 20px 0px 0px rgba(181, 145, 95, 0.1); }
+
+        /* --- AMENITIES --- */
+        .amenities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; text-align: center; margin-top: 40px; }
+        .amenity-item i { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
+        .amenity-item p { font-weight: 500; color: var(--primary); font-size: 0.95rem; }
+
+        /* --- ACCOMMODATION --- */
+        .rooms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .room-card { background: var(--white); border: 1px solid #eee; transition: transform 0.4s ease; }
+        .room-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        .room-img { height: 250px; background-size: cover; background-position: center; }
+        .img-1 { background-image: url('images/room1.jpg'); }
+        .img-2 { background-image: url('images/room2.jpg'); }
+        .img-3 { background-image: url('images/room3.jpg'); }
+        .img-4 { background-image: url('images/room4.jpg'); }
+        .room-info { padding: 30px; text-align: center; }
+        .room-info h3 { font-size: 1.4rem; color: var(--primary); margin-bottom: 10px; }
+        .room-info p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px; }
+        .room-link { color: var(--accent); font-weight: 500; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+
+        /* --- GOOGLE REVIEWS (ΝΕΟ & ΠΟΛΥΤΕΛΕΣ) --- */
+        .google-reviews-header { text-align: center; margin-bottom: 40px; }
+        .google-score { font-size: 3rem; font-weight: 600; color: var(--primary); line-height: 1; }
+        .google-stars { color: var(--google-stars); font-size: 1.2rem; margin: 10px 0; }
+        
+        .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .google-card { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: left; position: relative; }
+        .g-user-info { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .g-avatar { width: 45px; height: 45px; background-color: #4285F4; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem; }
+        .g-name { font-weight: 600; color: var(--primary); font-size: 0.95rem; }
+        .g-date { font-size: 0.8rem; color: #999; }
+        .g-icon { position: absolute; top: 30px; right: 30px; width: 25px; } /* Βάζουμε ένα G εικονίδιο */
+        .g-text { font-size: 0.95rem; color: var(--text-dark); line-height: 1.6; }
+        
+        .all-reviews-btn { display: inline-block; margin-top: 40px; padding: 12px 30px; border: 1px solid #dadce0; border-radius: 20px; color: #1a73e8; font-weight: 500; font-size: 0.95rem; transition: background 0.3s; }
+        .all-reviews-btn:hover { background: #f1f3f4; }
+        .all-reviews-btn i { margin-right: 8px; }
+
+        /* --- LOCATION REDESIGN (PREMIUM FLOATING CARD) --- */
+        #location {
+            position: relative;
+            height: 600px; /* Σταθερό ύψος για να φαίνεται η εικόνα από πίσω */
+            background: url('images/location.jpg') center/cover fixed; /* Parallax effect */
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Η κάρτα πάει δεξιά */
+            padding: 0 10%;
+        }
+
+        /* Ένα διακριτικό σκούρο φίλτρο πάνω από τη φωτογραφία του δάσους */
+        #location::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.3); z-index: 1;
+        }
+
+        .location-card {
+            position: relative;
+            z-index: 2; /* Πάνω από την εικόνα */
+            background: var(--white);
+            padding: 50px;
+            max-width: 450px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            text-align: left;
+        }
+
+        .location-card h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
+        .location-card p { font-size: 0.95rem; color: var(--text-light); margin-bottom: 15px; }
+        .location-card i { color: var(--accent); width: 25px; text-align: center; margin-right: 10px; }
+        
+        .map-btn { display: inline-block; margin-top: 20px; background-color: var(--primary); color: var(--white); padding: 15px 30px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: background 0.3s; width: 100%; text-align: center; }
+        .map-btn:hover { background-color: var(--accent); }
+
+        /* --- FOOTER --- */
+        footer { background-color: #111; color: rgba(255,255,255,0.6); padding: 60px 5% 20px; text-align: center; }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 40px; font-size: 0.8rem; }
+
+        /* --- RESPONSIVE / ΚΙΝΗΤΑ --- */
+        @media (max-width: 991px) {
+            .menu-toggle { display: block; }
+            nav ul { position: fixed; top: 0; right: -100%; width: 250px; height: 100vh; background-color: var(--primary); flex-direction: column; justify-content: center; transition: right 0.4s ease; padding: 50px 0; }
+            nav ul.active { right: 0; }
+            nav ul li a { color: var(--white) !important; font-size: 1.1rem; }
+            #philosophy { flex-direction: column; }
+            .hero-content h1 { font-size: 3rem; }
+            #location { justify-content: center; padding: 50px 5%; height: auto; }
+            .location-card { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="navbar">
+        <a href="#home" class="logo">Bistola</a>
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <nav>
+            <ul id="nav-links">
+                <li><a href="#home">Αρχικη</a></li>
+                <li><a href="#philosophy">Ο Ξενωνας</a></li>
+                <li><a href="#accommodation">Δωματια</a></li>
+                <li><a href="#reviews">Κριτικες</a></li>
+                <li><a href="#location">Τοποθεσια</a></li>
+                <li><a href="https://booking.com/bistola" target="_blank" class="book-btn">Κρατηση</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="hero-content">
+            <h1>Bistola Guesthouse</h1>
+            <p>Αυθεντικη φιλοξενια στην καρδια της Αρκαδιας</p>
+            <a href="#accommodation" class="btn-solid">Επιλεξτε Δωματιο</a>
+        </div>
+    </section>
+
+    <section id="philosophy" class="section-padding">
+        <div class="phil-text">
+            <h3 class="section-subtitle">Ο Ξενωνας μας</h3>
+            <h2>Πολυτέλεια εναρμονισμένη με τη Φύση</h2>
+            <p>Στη μαγευτική Βλαχοκερασιά, δημιουργήσαμε έναν χώρο όπου ο χρόνος σταματά. Ο Ξενώνας Bistola συνδυάζει την παραδοσιακή αρκαδική αρχιτεκτονική με τις πιο σύγχρονες, premium ανέσεις.</p>
+        </div>
+        <div class="phil-image"></div>
+    </section>
+
+    <section class="section-padding bg-light">
+        <h3 class="section-subtitle">Η Εμπειρια</h3>
+        <h2 class="section-title">Παροχές Υψηλών Προδιαγραφών</h2>
+        <div class="amenities-grid">
+            <div class="amenity-item"><i class="fa-solid fa-fire"></i><p>Τζάκι σε επιλεγμένα δωμάτια</p></div>
+            <div class="amenity-item"><i class="fa-solid fa-mug-hot"></i><p>Παραδοσιακό Πρωινό</p></div>
+            <div class="amenity-item"><i class="fa-solid fa-wifi"></i><p>Δωρεάν Wi-Fi υψηλής ταχύτητας</p></div>
+            <div class="amenity-item"><i class="fa-solid fa-mountain-sun"></i><p>Μαγευτική Θέα στο βουνό</p></div>
+            <div class="amenity-item"><i class="fa-solid fa-bed"></i><p>Premium Κλινοσκεπάσματα</p></div>
+        </div>
+    </section>
+
+    <section id="accommodation" class="section-padding">
+        <h3 class="section-subtitle">Διαμονη</h3>
+        <h2 class="section-title">Επιλέξτε το δωμάτιό σας</h2>
+        <div class="rooms-grid">
+            <div class="room-card"><div class="room-img img-1"></div><div class="room-info"><h3>Superior Σουίτα</h3><p>Ευρύχωρη σουίτα με τζάκι και θέα.</p></div></div>
+            <div class="room-card"><div class="room-img img-2"></div><div class="room-info"><h3>Deluxe Δίκλινο</h3><p>Κομψή διακόσμηση, με king-size κρεβάτι.</p></div></div>
+            <div class="room-card"><div class="room-img img-3"></div><div class="room-info"><h3>Family Loft</h3><p>Ιδανικό για οικογένειες ή παρέες.</p></div></div>
+            <div class="room-card"><div class="room-img img-4"></div><div class="room-info"><h3>Standard Δίκλινο</h3><p>Ζεστό και φιλόξενο δωμάτιο.</p></div></div>
+        </div>
+    </section>
+
+    <section id="reviews" class="section-padding bg-light" style="text-align: center;">
+        <h3 class="section-subtitle">Αξιολογησεις</h3>
+        
+        <div class="google-reviews-header">
+            <h2 class="section-title" style="margin-bottom: 5px;">Εξαιρετική Βαθμολογία</h2>
+            <div class="google-score">5.0</div>
+            <div class="google-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p style="color: var(--text-light); font-size: 0.9rem;">Βασισμένο σε αυθεντικές κριτικές της Google</p>
+        </div>
+
+        <div class="testi-grid">
+            <div class="google-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="g-icon">
+                <div class="g-user-info">
+                    <div class="g-avatar" style="background-color: #0f9d58;">Γ</div>
+                    <div>
+                        <div class="g-name">Γιώργος Π.</div>
+                        <div class="g-date">Πριν 2 εβδομάδες</div>
+                    </div>
+                </div>
+                <div class="google-stars" style="margin-top:0;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="g-text">Μαγευτική τοποθεσία και απίστευτη ησυχία. Το δωμάτιο ήταν πεντακάθαρο, άνετο και το τζάκι έδινε μια υπέροχη ζεστασιά. Το συστήνω ανεπιφύλακτα!</p>
+            </div>
+
+            <div class="google-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="g-icon">
+                <div class="g-user-info">
+                    <div class="g-avatar" style="background-color: #db4437;">Μ</div>
+                    <div>
+                        <div class="g-name">Μαρία Α.</div>
+                        <div class="g-date">Πριν 1 μήνα</div>
+                    </div>
+                </div>
+                <div class="google-stars" style="margin-top:0;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="g-text">Ο ορισμός της φιλοξενίας. Μας υποδέχτηκαν με χαμόγελο, το πρωινό ήταν εξαιρετικό με τοπικά προϊόντα. Το δάσος της Σκιρίτιδας είναι δίπλα.</p>
+            </div>
+
+            <div class="google-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="g-icon">
+                <div class="g-user-info">
+                    <div class="g-avatar" style="background-color: #f4b400;">K</div>
+                    <div>
+                        <div class="g-name">Κώστας Λ.</div>
+                        <div class="g-date">Πριν 3 μήνες</div>
+                    </div>
+                </div>
+                <div class="google-stars" style="margin-top:0;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="g-text">Premium εμπειρία στο βουνό. Πολύ προσεγμένος χώρος, με σεβασμό στην αρχιτεκτονική του τόπου. Άψογη σχέση ποιότητας-τιμής.</p>
+            </div>
+        </div>
+
+        <a href="https://www.google.com/travel/search?gsas=1&ts=EggKAggDCgIIAxocEhoSFAoHCOoPEAQYARIHCOoPEAQYAhgBMgIQAA&qs=MhRDZ3NJbklQbC1NdURfdGVCQVJBQjgC&ap=ugEHcmV2aWV3cw&ictx=111&biw=1920&bih=911&hl=el-GR&ved=0CAAQ5JsGahcKEwjo3cfE8siTAxUAAAAAHQAAAAAQBw" target="_blank" class="all-reviews-btn">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="G" style="width: 15px; vertical-align: middle; margin-right: 5px;"> 
+            Δείτε όλες τις κριτικές στο Google
+        </a>
+    </section>
+
+    <section id="location">
+        <div class="location-card">
+            <h3 class="section-subtitle" style="text-align: left; margin-bottom: 10px; color: var(--accent);">Τοποθεσια</h3>
+            <h2>Βρείτε μας στη Βλαχοκερασιά</h2>
+            <p style="margin-bottom: 25px;">Ο ξενώνας μας βρίσκεται σε ιδανικό σημείο, δίπλα στις παραδοσιακές ταβέρνες του χωριού και μόλις λίγα λεπτά από την αφετηρία για το μαγευτικό δάσος της Σκιρίτιδας.</p>
+            
+            <p><i class="fa-solid fa-location-dot"></i> Βλαχοκερασιά, Αρκαδία, Τ.Κ. 220 16</p>
+            <p><i class="fa-solid fa-phone"></i> +30 2710 XX XXXX</p>
+            <p><i class="fa-solid fa-envelope"></i> info@bistolaguesthouse.gr</p>
+
+            <a href="https://maps.google.com/?q=Bistola+Guesthouse+Vlachokerasia" target="_blank" class="map-btn">
+                Ληψη Οδηγιων
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">Bistola Guesthouse</div>
+        <p>Premium Διαμονή στην Αρκαδία</p>
+        <div class="footer-bottom"><p>© 2026 Bistola Guesthouse. All rights reserved.</p></div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var header = document.getElementById('navbar');
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            if(navLinks.classList.contains('active')) menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+            else menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+        document.querySelectorAll('#nav-links li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+    </script>
+</body>
+</html>
